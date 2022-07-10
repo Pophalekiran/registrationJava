@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: appointment-service
+data:
+  application.properties: |-
+    bean.message=Testing reload kiran ! Message from backend is: %s <br/> Services : %s
+    postgres_host=$(kubectl get svc postgres -o jsonpath="{.spec.clusterIP}")

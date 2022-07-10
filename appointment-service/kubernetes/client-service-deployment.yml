@@ -1,0 +1,39 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: appointment-service
+spec:
+  selector:
+    app: appointment-service
+  ports:
+  - protocol: TCP
+    port: 8080
+    nodePort: 30083
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: appointment-service
+spec:
+  selector:
+      matchLabels:
+        app: appointment-service
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: appointment-service
+    spec:
+      containers:
+        - name: appointment-service
+          image: pophalekiran/appointment-service:appointment_104
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          env:
+            - name: postgres_host
+              valueFrom:
+                configMapKeyRef:
+                  name: hostname-config
+                  key: postgres_host

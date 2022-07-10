@@ -17,10 +17,10 @@ public class CustomerController {
 	@Autowired
 	ICustomerService customerSrevice;
 	
-	@Value("${server.name}")
+	//@Value("${server.name}")
 	private String serverName;
 	
-	@Value("${security.name}")
+	//@Value("${security.name}")
 	private String security;
 	
 	

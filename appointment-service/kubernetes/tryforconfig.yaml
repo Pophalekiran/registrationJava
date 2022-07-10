@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+  creationTimestamp: "2022-07-09T14:18:10Z"
+  generation: 1
+  labels:
+    app: tryforconfig
+  name: tryforconfig
+  namespace: default
+  resourceVersion: "29860"
+  uid: e0c93798-6512-4a28-bd3c-880927f658de
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: tryforconfig
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: tryforconfig
+    spec:
+      containers:
+      - image: appointment-service:0.0.1
+        imagePullPolicy: IfNotPresent
+        name: appointment-service
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status:
+  conditions:
+  - lastTransitionTime: "2022-07-09T14:18:11Z"
+    lastUpdateTime: "2022-07-09T14:18:11Z"
+    message: Deployment does not have minimum availability.
+    reason: MinimumReplicasUnavailable
+    status: "False"
+    type: Available
+  - lastTransitionTime: "2022-07-09T14:28:12Z"
+    lastUpdateTime: "2022-07-09T14:28:12Z"
+    message: ReplicaSet "tryforconfig-5584fdb6c9" has timed out progressing.
+    reason: ProgressDeadlineExceeded
+    status: "False"
+    type: Progressing
+  observedGeneration: 1
+  replicas: 1
+  unavailableReplicas: 1
+  updatedReplicas: 1
